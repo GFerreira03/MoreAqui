@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".insertNewProperty">
+    tools:context=".Insert">
 
     <TextView
         android:id="@+id/phoneTxtView"
@@ -140,6 +140,7 @@
         app:layout_constraintTop_toBottomOf="@+id/sizeRadioGp" />
 
     <Button
+        android:id="@+id/confirm_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
