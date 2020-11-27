@@ -30,7 +30,7 @@ public class Insert extends AppCompatActivity {
 
         CheckBox dunnoSize = findViewById(R.id.dunnoSize);
         CheckBox dunnoType = findViewById(R.id.dunnoType);
-        CheckBox isBuilt = findViewById(R.id.occupationCheckBox);
+        CheckBox isBuilt = findViewById(R.id.isBuilt);
 
         typeRadiogp.setOnCheckedChangeListener(((radioGroup, i) -> {
             switch (i){

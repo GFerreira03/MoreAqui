@@ -4,52 +4,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#030908">
 
-    <ImageView
+    <TextView
         android:id="@+id/logo"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="16dp"
-        android:src="@drawable/logo"
+        android:layout_marginTop="150dp"
+        android:fontFamily="@font/actor"
+        android:text="MORE \nAQUI"
+        android:textAlignment="center"
+        android:textColor="#66F9F4"
+        android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/createNew"
-        android:text="Novo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="1dp"
+        android:background="@drawable/button_selector_left"
+        android:fontFamily="@font/anton"
+        android:text="Novo"
+        android:textSize="18sp"
+        android:textColor="#66F9F4"
         app:layout_constraintEnd_toStartOf="@+id/show"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        android:stateListAnimator="@null"/>
 
     <Button
         android:id="@+id/show"
-        android:text="Procurar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="1dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="50dp"
+        android:background="@drawable/button_selector_right"
+        android:fontFamily="@font/anton"
+        android:text="Procurar"
+        android:textColor="#66F9F4"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/createNew"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        android:stateListAnimator="@null"/>
 
     <Button
         android:id="@+id/mapShow"
-        android:text="Mapa"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/anton"
+        android:text="Mapa"
+        android:textSize="18sp"
+        android:textColor="#66F9F4"
         app:layout_constraintEnd_toEndOf="@id/show"
         app:layout_constraintStart_toStartOf="@id/createNew"
-        app:layout_constraintTop_toBottomOf="@id/createNew" />
+        app:layout_constraintTop_toBottomOf="@id/createNew"
+        android:background="@drawable/button_selector"
+        android:stateListAnimator="@null"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
