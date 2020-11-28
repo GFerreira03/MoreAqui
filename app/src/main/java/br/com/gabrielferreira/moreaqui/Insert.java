@@ -12,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Insert extends AppCompatActivity {
@@ -31,6 +32,8 @@ public class Insert extends AppCompatActivity {
         CheckBox dunnoSize = findViewById(R.id.dunnoSize);
         CheckBox dunnoType = findViewById(R.id.dunnoType);
         CheckBox isBuilt = findViewById(R.id.isBuilt);
+
+        input_phone.addTextChangedListener(Mask.insert(Mask.CELULAR_MASK, input_phone));
 
         typeRadiogp.setOnCheckedChangeListener(((radioGroup, i) -> {
             switch (i){
@@ -100,8 +103,8 @@ public class Insert extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 phone = input_phone.getText().toString();
-                String expressao = "[1-9]{2}?[0-9]{8,9}";
-
+                String expressao = "\\([1-9]{2}\\) [0-9]{5} [0-9]{3,4}";
+                Log.v("Numero", phone);
                 if (!phone.matches(expressao)) {
                     Toast.makeText(getApplicationContext(), "Numero Invalido.", Toast.LENGTH_SHORT).show();
                 } else {

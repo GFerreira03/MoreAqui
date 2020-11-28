@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
         novo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(getApplicationContext(), Insert.class);
                 startActivity(intent);
             }
