@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="#030908">
+    android:background="#E4E4E4">
 
     <TextView
         android:id="@+id/logo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
-        android:fontFamily="@font/actor"
-        android:text="MORE \nAQUI"
+        android:fontFamily="@font/anton"
+        android:text="MORE AQUI"
         android:textAlignment="center"
-        android:textColor="#66F9F4"
+        android:textColor="@color/orange"
         android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,11 +32,11 @@
         android:fontFamily="@font/anton"
         android:text="Novo"
         android:textSize="18sp"
-        android:textColor="#66F9F4"
+        android:textColor="@drawable/button_text_color"
         app:layout_constraintEnd_toStartOf="@+id/show"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo"
-        android:stateListAnimator="@null"/>
+        />
 
     <Button
         android:id="@+id/show"
@@ -48,12 +48,12 @@
         android:background="@drawable/button_selector_right"
         android:fontFamily="@font/anton"
         android:text="Procurar"
-        android:textColor="#66F9F4"
+        android:textColor="@drawable/button_text_color"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/createNew"
         app:layout_constraintTop_toBottomOf="@+id/logo"
-        android:stateListAnimator="@null"/>
+        />
 
     <Button
         android:id="@+id/mapShow"
@@ -63,12 +63,12 @@
         android:fontFamily="@font/anton"
         android:text="Mapa"
         android:textSize="18sp"
-        android:textColor="#66F9F4"
+        android:textColor="@drawable/button_text_color"
         app:layout_constraintEnd_toEndOf="@id/show"
         app:layout_constraintStart_toStartOf="@id/createNew"
         app:layout_constraintTop_toBottomOf="@id/createNew"
         android:background="@drawable/button_selector"
-        android:stateListAnimator="@null"
+
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
