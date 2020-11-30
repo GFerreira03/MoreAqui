@@ -39,10 +39,10 @@ public class ShowAddresses extends AppCompatActivity {
             listView.setAdapter(adapter);
 
             for (LocationEstate i : estates){
-                arrayList.add(i.getPHONE() +
-                        "\n"+ i.getTYPE() +
-                        "\n" + i.getSIZE() +
-                        "\n"+ i.getSTATUS());
+                arrayList.add("Telefone: "+i.getPHONE() +
+                        "\nCondição: "+ i.getSTATUS() +
+                        "\n\nTipo: " + i.getTYPE() +
+                        "\nTamanho: "+ i.getSIZE());
 
                 adapter.notifyDataSetChanged();
             }
