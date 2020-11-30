@@ -176,7 +176,7 @@ public class Insert extends AppCompatActivity implements LocationListener {
                 else {
                     status = isBuilt.isChecked() ? "Em construção" : "Construída";
 
-                    LocationEstate locationEstate = new LocationEstate(size, status, phone, type, lat, lng);
+                    LocationEstate locationEstate = new LocationEstate(type, size,phone ,status , lat, lng);
                     Log.v("Added", locationEstate.PHONE + " | " + locationEstate.SIZE  + " | " + locationEstate.TYPE  + " | " + locationEstate.STATUS + " | " + locationEstate.LATITUDE + " | " + locationEstate.LONGITUDE);
 
                     EstateDB db = EstateDB.getInstance(Insert.this);

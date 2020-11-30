@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     Button newBtn, recordBtn, listBtn;
@@ -39,7 +41,9 @@ public class MainActivity extends AppCompatActivity {
         recordBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                EstateDB db = EstateDB.getInstance(MainActivity.this);
+                List<LocationEstate> estates = db.getAllEstates();
+                new RecordData().execute(estates);
             }
         });
     }

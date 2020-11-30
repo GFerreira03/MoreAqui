@@ -62,11 +62,6 @@ public class Estate implements Serializable {
 		this.STATUS = inConstruction;
 	}
 
-	@Override
-	public final String toString() {
-		String ans = "Imovel: " + TYPE + ", Tamanho: " + SIZE + ", Contato: " + this.PHONE + ", (" + this.STATUS + ")";
-		return ans;
-	}
 
 	public String getPHONE() {
 		return PHONE;

@@ -19,4 +19,9 @@ public class LocationEstate extends Estate {
 		this.LONGITUDE = longitude;
 	}
 
+	@Override
+	public final String toString() {
+		String ans = "Imovel: " + TYPE + ", Tamanho: " + SIZE + ", Contato: " + this.PHONE + ", (" + this.STATUS + ") " + "Latitude: " + this.LATITUDE + " Longitude: " + this.LONGITUDE;
+		return ans;
+	}
 }
