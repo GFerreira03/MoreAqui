@@ -71,4 +71,20 @@
 
         />
 
+    <Button
+        android:id="@+id/btn_record"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/button_selector"
+        android:fontFamily="@font/anton"
+        android:text="GRAVAR"
+        android:textColor="@drawable/button_text_color"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/show"
+        app:layout_constraintHorizontal_bias="0.0"
+
+        app:layout_constraintStart_toStartOf="@id/createNew"
+        app:layout_constraintTop_toBottomOf="@+id/mapShow" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

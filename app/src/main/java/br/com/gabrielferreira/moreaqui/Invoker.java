@@ -75,10 +75,8 @@ public class Invoker {
 
   /**
    * This method invokes a command over a DAO.
-   * 
-   * @param d the DAO that will interface communication with the server.
-   * @param c the command that contains the actions that will be executed.
-   */
+   *  @param d the DAO that will interface communication with the server.
+   * @param c the command that contains the actions that will be executed.*/
   public final void invoke(final DaoImpl d, final Command c) {
     openConnection();
     d.setChannels(out, in);

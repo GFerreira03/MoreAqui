@@ -14,4 +14,5 @@ public interface Command {
    * @param d the subject of the actions that will be executed.
    */
   void execute(DaoImpl d);
+
 }

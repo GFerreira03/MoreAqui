@@ -1,14 +1,22 @@
 package br.com.gabrielferreira.moreaqui;
 
 public class LocationEstate extends Estate {
-    private static final long serialVersionUID = 1L;
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 
-    public final Double LATITUDE;
-    public final Double LONGITUDE;
+	/** The size of the estate: small, medium, large. */
+	public final Double LATITUDE;
 
-    public LocationEstate(String size, String status, String phone, String type, Double latitude, Double longitude) {
-        super(size, status, phone, type);
-        this.LATITUDE = latitude;
-        this.LONGITUDE = longitude;
-    }
+	/** True if the estate is under construction. */
+	public final Double LONGITUDE;
+
+	public LocationEstate(String type, String size, String phone, String inConstruction, double latitude,
+			double longitude) {
+		super(type, size, phone, inConstruction);
+		this.LATITUDE = latitude;
+		this.LONGITUDE = longitude;
+	}
+
 }
