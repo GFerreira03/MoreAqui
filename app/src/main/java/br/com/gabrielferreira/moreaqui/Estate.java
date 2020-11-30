@@ -68,4 +68,19 @@ public class Estate implements Serializable {
 		return ans;
 	}
 
+	public String getPHONE() {
+		return PHONE;
+	}
+
+	public String getTYPE() {
+		return TYPE;
+	}
+
+	public String getSIZE() {
+		return SIZE;
+	}
+
+	public String getSTATUS() {
+		return STATUS;
+	}
 }

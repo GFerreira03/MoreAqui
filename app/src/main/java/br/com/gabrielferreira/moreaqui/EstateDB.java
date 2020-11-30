@@ -23,6 +23,8 @@ public class EstateDB extends SQLiteOpenHelper {
     private static final String SIZE = "size";
     private static final String STATUS = "status";
     private static final String PHONE = "phone";
+    private static final String LATITUDE = "latitude";
+    private static final String LONGITUDE = "longitude";
 
     public static synchronized EstateDB getInstance(Context context) {
         if (estateDB == null) {
@@ -42,7 +44,9 @@ public class EstateDB extends SQLiteOpenHelper {
                 + TYPE + " TEXT NOT NULL, "
                 + SIZE + " TEXT NOT NULL, "
                 + STATUS + " TEXT, "
-                + PHONE + " TEXT NOT NULL);");
+                + PHONE + " TEXT NOT NULL, "
+                + LATITUDE + " DOUBLE, "
+                + LONGITUDE + " DOUBLE);");
     }
 
     @Override
@@ -50,7 +54,7 @@ public class EstateDB extends SQLiteOpenHelper {
 
     }
 
-    public void addEstate (Estate estate){
+    public void addEstate (LocationEstate estate){
         SQLiteDatabase db = getWritableDatabase();
 
         db.beginTransaction();
@@ -60,18 +64,21 @@ public class EstateDB extends SQLiteOpenHelper {
             values.put(SIZE, estate.SIZE);
             values.put(STATUS, estate.STATUS);
             values.put(PHONE, estate.PHONE);
+            values.put(LATITUDE, estate.LATITUDE);
+            values.put(LONGITUDE, estate.LONGITUDE);
 
             db.insertOrThrow(TABLE_NAME, null, values);
             db.setTransactionSuccessful();
         } catch (Exception e) {
             Log.d("ADIÇÃO AO BD", "Erro ao inserir dados no banco de dados.");
+            Log.d("ADIÇÃO AO BD", e.toString());
         } finally {
             db.endTransaction();
         }
     }
 
-    public List<Estate> getAllEstates() {
-        List<Estate> estates = new ArrayList<>();
+    public List<LocationEstate> getAllEstates() {
+        List<LocationEstate> estates = new ArrayList<>();
 
         String POST_SELECT_QUERY = String.format("SELECT * FROM %s", TABLE_NAME);
 
@@ -80,10 +87,12 @@ public class EstateDB extends SQLiteOpenHelper {
         try {
             if (cursor.moveToFirst()) {
                 do {
-                    Estate newEstate = new Estate(cursor.getString(cursor.getColumnIndex(TYPE)),
+                    LocationEstate newEstate = new LocationEstate(cursor.getString(cursor.getColumnIndex(TYPE)),
                             cursor.getString(cursor.getColumnIndex(SIZE)),
                             cursor.getString(cursor.getColumnIndex(PHONE)),
-                            cursor.getString(cursor.getColumnIndex(STATUS)));
+                            cursor.getString(cursor.getColumnIndex(STATUS)),
+                            cursor.getDouble(cursor.getColumnIndex(LATITUDE)),
+                            cursor.getDouble(cursor.getColumnIndex(LONGITUDE)));
                     estates.add(newEstate);
                 } while (cursor.moveToNext());
             }
