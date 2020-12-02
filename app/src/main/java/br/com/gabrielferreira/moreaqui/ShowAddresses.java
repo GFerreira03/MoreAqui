@@ -25,9 +25,7 @@ public class ShowAddresses extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.list_estates);
         estateDB = EstateDB.getInstance(this);
-
         listEstates();
-
     }
 
     private void listEstates() {

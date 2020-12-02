@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,17 +14,17 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
+
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
+
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
+
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -40,16 +39,10 @@ public class Insert extends AppCompatActivity implements LocationListener {
     // declara constante com a tag que será mostrada no Log
     private static final String TAG = "MainActivity";
 
-    // declara as variaveis que farão o link com os elementos do XML (layout)
-    private TextView latitudeText;
-    private TextView longitudeText;
     // declara o objeto LocationManager para recuperar a localização do usuário
     private LocationManager locationManager;
     // declara um string para determinar o tipo de provedor de localização
     private String provider;
-
-    // declara uma view que será atualizada com os dados de localização
-    private View view;
     // declara uma constante que guarda as permissões necessárias para acessar
     // a internet o GPS
     private static final String[] PERMISSIONS = {"android.permission.INTERNET",
@@ -212,11 +205,8 @@ public class Insert extends AppCompatActivity implements LocationListener {
      * Método que pede autorização de acesso ao usuário para Internet e GPS
      */
     private void requestPermission() {
-
         ActivityCompat.requestPermissions(this,  PERMISSIONS, PERMISSION_REQUEST_CODE);
-        // recria a MainActivity com as permissões concedidas
         this.recreate();
-
     }
 
     /***
@@ -236,12 +226,9 @@ public class Insert extends AppCompatActivity implements LocationListener {
             boolean coarseLocationAccepted = grantResults[2] == PackageManager.PERMISSION_GRANTED;
 
             if (internetAccepted && fineLocationAccepted && coarseLocationAccepted) {
-                Snackbar.make(view,
-                        "Permissões garantidas.",
-                        Snackbar.LENGTH_LONG).show();
+                Toast.makeText(this, "Permissões concedidas", Toast.LENGTH_SHORT);
             } else {
-                Snackbar.make(view, "Permissões negadas.", Snackbar.LENGTH_LONG).show();
-
+                Toast.makeText(this, "Permissões negadas", Toast.LENGTH_SHORT);
                 if (shouldShowRequestPermissionRationale(ACCESS_FINE_LOCATION)) {
                     showMessageOKCancel("Você precisa autorizar todas as permissões.",
                             new DialogInterface.OnClickListener() {
