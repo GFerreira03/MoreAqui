@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MoreAqui</string>
+    <string name="map_key" translatable="false">AIzaSyB-osjdo4jL0zhgoADZZPFhYKRvfD2c94o</string>
 </resources>

@@ -27,8 +27,6 @@ import android.widget.RadioGroup;
 
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.INTERNET;
@@ -45,11 +43,8 @@ public class Insert extends AppCompatActivity implements LocationListener {
     private String provider;
     // declara uma constante que guarda as permissões necessárias para acessar
     // a internet o GPS
-    private static final String[] PERMISSIONS = {"android.permission.INTERNET",
-            "android.permission.ACCESS_FINE_LOCATION", "android.permission.ACCESS_COARSE_LOCATION"};
 
-    // declara uma constante que informa o valor do tipo de permissão que o app precisa
-    private static final int PERMISSION_REQUEST_CODE = 200;
+    private PermissionsHandler permissionsHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,9 +71,9 @@ public class Insert extends AppCompatActivity implements LocationListener {
         Criteria criteria = new Criteria();
         // inicializa provider com o provedor diponibilizado pelo locationManager
         provider = locationManager.getBestProvider(criteria, false);
-
+        permissionsHandler = new PermissionsHandler(this);
         // verifica se tem permissão para acessar internet e o GPS
-        if (checkPermission()) {
+        if (permissionsHandler.checkPermission()) {
             // caso a permissão já tenha sido concedida, atualiza a localização
             Location location = locationManager.getLastKnownLocation(provider);
 
@@ -93,7 +88,7 @@ public class Insert extends AppCompatActivity implements LocationListener {
             }
         } else {
             // caso não tenha permissão, solicita a permissão ao usuário
-            requestPermission();
+            permissionsHandler.requestPermission();
         }
 
         typeRadiogp.setOnCheckedChangeListener(((radioGroup, i) -> {
@@ -185,78 +180,19 @@ public class Insert extends AppCompatActivity implements LocationListener {
         });
     }
 
-    /***
-     * Método que verifica as permissão de acesso a Internet e ao GPS
-     * @return boolean
-     */
-    private boolean checkPermission() {
-        int internetResult = ContextCompat.checkSelfPermission(getApplicationContext(), INTERNET);
-        int fineLocationResult = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_FINE_LOCATION);
-        int coarseLocationResult = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_COARSE_LOCATION);
-
-        // retorna true caso tenha as três permissões ou false caso uma das permissões tenha
-        // sido negada
-        return internetResult == PackageManager.PERMISSION_GRANTED &&
-                fineLocationResult == PackageManager.PERMISSION_GRANTED &&
-                coarseLocationResult == PackageManager.PERMISSION_GRANTED;
-    }
-
-    /***
-     * Método que pede autorização de acesso ao usuário para Internet e GPS
-     */
-    private void requestPermission() {
-        ActivityCompat.requestPermissions(this,  PERMISSIONS, PERMISSION_REQUEST_CODE);
-        this.recreate();
-    }
-
-    /***
-     *
-     * @param requestCode
-     * @param permissions
-     * @param grantResults
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-
-        // verifca se as permissões solicitadas foram concedidas pelo usuário
-        if (requestCode == PERMISSION_REQUEST_CODE && grantResults.length > 0) {
-
-            boolean internetAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-            boolean fineLocationAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
-            boolean coarseLocationAccepted = grantResults[2] == PackageManager.PERMISSION_GRANTED;
-
-            if (internetAccepted && fineLocationAccepted && coarseLocationAccepted) {
-                Toast.makeText(this, "Permissões concedidas", Toast.LENGTH_SHORT);
-            } else {
-                Toast.makeText(this, "Permissões negadas", Toast.LENGTH_SHORT);
-                if (shouldShowRequestPermissionRationale(ACCESS_FINE_LOCATION)) {
-                    showMessageOKCancel("Você precisa autorizar todas as permissões.",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    requestPermissions(PERMISSIONS,
-                                            PERMISSION_REQUEST_CODE);
-                                }
-                            });
-                    return;
-                }
-
-            }
-        }
-    }
 
     @Override
     protected void onResume() {
         super.onResume();
         // verifica as permissões concedidas
-        if (checkPermission()) {
+        if (permissionsHandler.checkPermission()) {
             // para de solicitar a atualização da localização
             locationManager.removeUpdates(this);
             // solita a atualização da localização
             locationManager.requestLocationUpdates(provider, 400, 1, this);
         } else {
             // caso contrário, solicita novamente a permissão de acesso para o usuário
-            requestPermission();
+            permissionsHandler.requestPermission();
         }
 
     }
@@ -292,20 +228,5 @@ public class Insert extends AppCompatActivity implements LocationListener {
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
 
-    }
-
-    /***
-     * Método responsável por mostrar ao usuário uma caixa de dialogo solicitando a permissão
-     * de uso da Internet e do GPS
-     * @param message
-     * @param okListener
-     */
-    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
-        new AlertDialog.Builder(Insert.this)
-                .setMessage(message)
-                .setPositiveButton("OK", okListener)
-                .setNegativeButton("Cancelar", null)
-                .create()
-                .show();
     }
 }
