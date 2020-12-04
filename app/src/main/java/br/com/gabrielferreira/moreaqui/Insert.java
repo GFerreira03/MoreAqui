@@ -205,7 +205,7 @@ public class Insert extends AppCompatActivity implements LocationListener {
     }
 
     @Override
-    public void onLocationChanged(@NonNull Location location) {
+    public void onLocationChanged(Location location) {
         lat = location.getLatitude();
         lng = location.getLongitude();
     }
