@@ -20,4 +20,8 @@
     <string name="app_insert_confirm">CONFIRMAR</string>
     <string name="app_insert_condition">CONDIÇÃO</string>
     <string name="app_msg_save">SALVO</string>
+    <string name="app_insert_built">CONSTRUÍDA</string>
+    <string name="app_warn_invalidNumber">NÚMERO INVÁLIDO</string>
+    <string name="app_blank_inserts">ALGUNS CAMPOS FORAM DEIXADOS EM BRANCO</string>
+    <string name="app_map_actualPosition">SUA POSIÇÃO ATUAL</string>
 </resources>

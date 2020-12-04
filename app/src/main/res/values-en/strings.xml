@@ -20,4 +20,8 @@
     <string name="app_insert_confirm">CONFIRM</string>
     <string name="app_insert_condition">CONDITION</string>
     <string name="app_msg_save">SAVED</string>
+    <string name="app_insert_built">BUILT</string>
+    <string name="app_warn_invalidNumber">INVALID NUMBER</string>
+    <string name="app_blank_inserts">SOME FIELDS WERE LEFT EMPTY</string>
+    <string name="app_map_actualPosition">YOUR ACTUAL POSITION</string>
 </resources>

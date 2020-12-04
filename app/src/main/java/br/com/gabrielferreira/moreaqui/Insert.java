@@ -1,36 +1,23 @@
 package br.com.gabrielferreira.moreaqui;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-
 import android.os.Bundle;
 import android.util.Log;
-
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
 import android.widget.Toast;
 
-import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-import static android.Manifest.permission.INTERNET;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Insert extends AppCompatActivity implements LocationListener {
     public String type, size, status, phone;
@@ -47,6 +34,7 @@ public class Insert extends AppCompatActivity implements LocationListener {
 
     private PermissionsHandler permissionsHandler;
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,77 +81,79 @@ public class Insert extends AppCompatActivity implements LocationListener {
         }
 
         typeRadiogp.setOnCheckedChangeListener(((radioGroup, i) -> {
+            Resources res = getResources();
             switch (i){
                 case R.id.houseRadioBtn:
-                    type = "Casa";
+                    type = res.getString(R.string.app_insert_house);
                     break;
                 case R.id.aptoRadioBtn:
-                    type = "Apartamento";
+                    type = res.getString(R.string.app_insert_apartment);
                     break;
                 case R.id.shopRadioBtn:
-                    type = "Loja";
+                    type = res.getString(R.string.app_insert_store);
                     break;
             }
         }));
 
-        dunnoSize.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (dunnoSize.isChecked()){
-                    size = "Não sei";
-                    sizeRadioGp.clearCheck();
-                    for(int i = 0; i < sizeRadioGp.getChildCount(); i++){
-                        ((RadioButton)sizeRadioGp.getChildAt(i)).setEnabled(false);
-                    }
-                } else {
-                    size = null;
-                    for(int i = 0; i < sizeRadioGp.getChildCount(); i++){
-                        ((RadioButton)sizeRadioGp.getChildAt(i)).setEnabled(true);
-                    }
+        dunnoSize.setOnCheckedChangeListener((compoundButton, b) -> {
+            Resources res = getResources();
+            if (dunnoSize.isChecked()){
+                size = res.getString(R.string.app_insert_idk);
+                sizeRadioGp.clearCheck();
+                for(int i = 0; i < sizeRadioGp.getChildCount(); i++){
+                    sizeRadioGp.getChildAt(i).setEnabled(false);
+                }
+            } else {
+                size = null;
+                for(int i = 0; i < sizeRadioGp.getChildCount(); i++){
+                    sizeRadioGp.getChildAt(i).setEnabled(true);
                 }
             }
         });
 
         sizeRadioGp.setOnCheckedChangeListener(((radioGroup1, i) -> {
+            Resources res = getResources();
             switch (i){
                 case R.id.smallRadioBtn:
-                    size = "Pequena";
+                    size = res.getString(R.string.app_insert_small);
                     break;
                 case R.id.mediumRadioBtn:
-                    size = "Média";
+                    size = res.getString(R.string.app_insert_medium);
                     break;
                 case R.id.bigRadioBtn:
-                    size = "Grande";
+                    size = res.getString(R.string.app_insert_large);
                     break;
             }
         }));
 
-        dunnoType.setOnCheckedChangeListener((CompoundButton.OnCheckedChangeListener) (compoundButton, b) -> {
+        dunnoType.setOnCheckedChangeListener((compoundButton, b) -> {
+            Resources res = getResources();
             if (dunnoType.isChecked()){
-                type = "Não sei";
+                type = res.getString(R.string.app_insert_idk);
                 typeRadiogp.clearCheck();
                 for(int i = 0; i < typeRadiogp.getChildCount(); i++){
-                    ((RadioButton)typeRadiogp.getChildAt(i)).setEnabled(false);
+                    typeRadiogp.getChildAt(i).setEnabled(false);
                 }
             } else {
                 type = null;
                 for(int i = 0; i < typeRadiogp.getChildCount(); i++){
-                    ((RadioButton)typeRadiogp.getChildAt(i)).setEnabled(true);
+                    typeRadiogp.getChildAt(i).setEnabled(true);
                 }
             }
         });
 
         confirm_button.setOnClickListener(v -> {
+            Resources res = getResources();
             phone = input_phone.getText().toString();
-            String expressao = "\\([1-9]{2}\\) [0-9]{5} [0-9]{3,4}";
+            String expressao = "\\([1-9]{2}\\) [0-9]{5} [0-9]{3,4}";  //(11) 12345 6789
             Log.v("Numero", phone);
             if (!phone.matches(expressao)) {
-                Toast.makeText(getApplicationContext(), "Numero Invalido.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.app_warn_invalidNumber, Toast.LENGTH_SHORT).show();
             } else {
                 if((typeRadiogp.getCheckedRadioButtonId() == -1 && !dunnoType.isChecked()) || (sizeRadioGp.getCheckedRadioButtonId() == -1 && !dunnoSize.isChecked()))
-                    Toast.makeText(getApplicationContext(), "Opções foram deixadas em branco.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.app_blank_inserts, Toast.LENGTH_SHORT).show();
                 else {
-                    status = isBuilt.isChecked() ? "Em construção" : "Construída";
+                    status = isBuilt.isChecked() ? res.getString(R.string.app_insert_building) : getString(R.string.app_insert_built);
 
                     LocationEstate locationEstate = new LocationEstate(type, size,phone ,status , lat, lng);
                     Log.v("Added", locationEstate.PHONE + " | " + locationEstate.SIZE  + " | " + locationEstate.TYPE  + " | " + locationEstate.STATUS + " | " + locationEstate.LATITUDE + " | " + locationEstate.LONGITUDE);
@@ -174,7 +164,6 @@ public class Insert extends AppCompatActivity implements LocationListener {
 
                     Intent intent = new Intent(Insert.this, MainActivity.class);
                     startActivity(intent);
-                    Resources res = getResources();
                     String msg = res.getString(R.string.app_msg_save);
                     Toast.makeText(Insert.this, msg, Toast.LENGTH_SHORT).show();
                     finish();
