@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -173,7 +174,9 @@ public class Insert extends AppCompatActivity implements LocationListener {
 
                     Intent intent = new Intent(Insert.this, MainActivity.class);
                     startActivity(intent);
-                    Toast.makeText(Insert.this, "Salvo!", Toast.LENGTH_SHORT).show();
+                    Resources res = getResources();
+                    String msg = res.getString(R.string.app_msg_save);
+                    Toast.makeText(Insert.this, msg, Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }

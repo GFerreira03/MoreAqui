@@ -1,32 +1,17 @@
 package br.com.gabrielferreira.moreaqui;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Criteria;
+import android.content.res.Resources;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.google.android.gms.location.LocationListener;
-
 import java.util.List;
-
-import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-import static android.Manifest.permission.INTERNET;
-
 public class MainActivity extends AppCompatActivity implements android.location.LocationListener {
     private PermissionsHandler permissionsHandler;
     private LocationManager locationManager;
@@ -79,9 +64,12 @@ public class MainActivity extends AppCompatActivity implements android.location.
         recordBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EstateDB db = EstateDB.getInstance(MainActivity.this);
-                List<LocationEstate> estates = db.getAllEstates();
-                new RecordData().execute(estates);
+                    EstateDB db = EstateDB.getInstance(MainActivity.this);
+                    List<LocationEstate> estates = db.getAllEstates();
+                    new RecordData().execute(estates);
+                    Resources res = getResources();
+                    String msg = res.getString(R.string.app_msg_save);
+                    Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_LONG).show();
             }
         });
 
@@ -108,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements android.location.
         }
 
     }
-
 
     @Override
     protected void onPause() {

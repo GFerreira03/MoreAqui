@@ -31,7 +31,6 @@ public class RecordData extends AsyncTask<List<LocationEstate>, Void, Void> {
             // serializados
             invoker.invoke(daoImpl, sendData);
         }
-
         return null;
     }
 }

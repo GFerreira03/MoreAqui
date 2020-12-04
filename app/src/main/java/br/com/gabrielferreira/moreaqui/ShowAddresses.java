@@ -2,6 +2,7 @@ package br.com.gabrielferreira.moreaqui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -35,12 +36,16 @@ public class ShowAddresses extends AppCompatActivity {
             adapter = new ArrayAdapter<String>(this, R.layout.row, arrayList);
 
             listView.setAdapter(adapter);
-
+            Resources res = getResources();
+            String phone = res.getString(R.string.app_insert_phone);
+            String type = res.getString(R.string.app_insert_type);
+            String size = res.getString(R.string.app_insert_size);
+            String condition = res.getString(R.string.app_insert_condition);
             for (LocationEstate i : estates){
-                arrayList.add("Telefone: "+i.getPHONE() +
-                        "\nCondição: "+ i.getSTATUS() +
-                        "\n\nTipo: " + i.getTYPE() +
-                        "\nTamanho: "+ i.getSIZE());
+                arrayList.add(phone+" "+i.getPHONE() +
+                        "\n"+condition+":"+" "+i.getSTATUS() +
+                        "\n" + type+" "+ i.getTYPE() +
+                        "\n"+size+" "+i.getSIZE());
 
                 adapter.notifyDataSetChanged();
             }
